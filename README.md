@@ -46,6 +46,14 @@ python -m venv venv
 source venv/bin/activate  # sous Windows : venv\Scripts\activate
 pip install -r requirements.txt
 
+## Créer un superutilisateur
+python manage.py createsuperuser
+# ⚠️ Par défaut dans ce projet :
+
+login : admin
+
+mot de passe : admin
+
 # Appliquer les migrations
 python manage.py makemigrations
 python manage.py migrate
