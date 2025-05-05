@@ -61,4 +61,29 @@ python manage.py migrate
 # Lancer le serveur
 python manage.py runserver
 
+## 🔐 Schéma du flux JWT avec Django REST Framework
++----------------------+         +------------------------+          +--------------------+
+|   Client Frontend    |  --->   |  Endpoint /api/token/  |  --->    |      Backend       |
+| (ex: React/Angular)  |         | (Login avec username/pwd)         |   (DRF + SimpleJWT)|
++----------------------+         +------------------------+          +--------------------+
+          |                                 |                                  |
+          | --------- Credentials --------> |                                  |
+          |                                 | -- Génère Access + Refresh Token |
+          |                                 | <---------- JWT Tokens --------- |
+          | <---------- 200 OK -------------|                                  |
+          |                                  |
+          | Utilise le **Access Token** pour les requêtes API :
+          | Authorization: Bearer <access_token>
+          |
+          | -------------> /api/campuses/ (GET)
+          | Authorization: Bearer eyJ0eXAiOiJKV...
+          |
+          | <----------- 200 OK -------------- Ou 401 si Token expiré/invalide
+          |
+          | Si le Token est expiré :
+          | -------------> /api/token/refresh/ (POST)
+          | Body: { "refresh": "<refresh_token>" }
+          |
+          | <----------- 200 OK avec nouveau access_token
+
 
