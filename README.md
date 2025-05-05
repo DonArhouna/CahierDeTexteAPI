@@ -62,6 +62,7 @@ python manage.py migrate
 python manage.py runserver
 
 ## 🔐 Schéma du flux JWT avec Django REST Framework
+```bash
 +----------------------+         +------------------------+          +--------------------+
 |   Client Frontend    |  --->   |  Endpoint /api/token/  |  --->    |      Backend       |
 | (ex: React/Angular)  |         | (Login avec username/pwd)         |   (DRF + SimpleJWT)|
